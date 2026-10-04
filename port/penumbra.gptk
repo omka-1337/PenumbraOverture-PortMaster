@@ -1,0 +1,38 @@
+# Penumbra: Overture - gamepad mapping
+#
+# The game is built around dragging things with the mouse: you hold the
+# interact button and physically pull doors and drawers. That is why the right
+# stick is the mouse and R1 is the left button - everything else follows from
+# keeping those two usable at once.
+
+back = tab
+start = esc
+
+a = space
+b = r
+x = f
+y = g
+
+l1 = mouse_right
+r1 = mouse_left
+l2 = lshift
+r2 = lctrl
+l3 = q
+r3 = e
+
+up = up
+down = down
+left = left
+right = right
+
+left_analog_up = w
+left_analog_down = s
+left_analog_left = a
+left_analog_right = d
+
+right_analog_up = mouse_movement_up
+right_analog_down = mouse_movement_down
+right_analog_left = mouse_movement_left
+right_analog_right = mouse_movement_right
+
+deadzone_scale = 6

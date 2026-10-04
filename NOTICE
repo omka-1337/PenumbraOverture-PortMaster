@@ -1,0 +1,14 @@
+Penumbra: Overture - PortMaster port
+====================================
+
+The game sources under PenumbraOverture/ are Frictional Games' GPL release of
+Penumbra: Overture, by way of HPL1 Rehatched (zenmumbler). Three files there are
+zenmumbler's own additions and carry no Frictional header. The build files,
+launch scripts and packaging in this repository were written for the port.
+
+The engine, and the third-party libraries it bundles, live in the HPL1 Fledged
+repository - see its NOTICE for those licences. Nothing third-party is vendored
+here.
+
+No game data is included. Penumbra: Overture's assets remain the property of
+Frictional Games; a player needs their own copy of the game.

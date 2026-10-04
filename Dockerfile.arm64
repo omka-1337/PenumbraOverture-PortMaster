@@ -1,0 +1,14 @@
+# PortMaster's build container, which is Ubuntu 20.04 on aarch64 with glibc
+# 2.31 - old enough for the devices the port has to run on.
+# Its stock gcc 9 has no <span>, and the engine is C++20, so add gcc 10.
+FROM monkeyx/retro_builder:arm64
+
+# The image ships a Kitware apt source whose key has expired, which fails the
+# whole update; nothing here needs it, so it goes.
+RUN rm -f /etc/apt/sources.list.d/kitware* \
+ && apt-get update -qq \
+ && apt-get install -y -qq --no-install-recommends g++-10 gcc-10 \
+ && rm -rf /var/lib/apt/lists/*
+
+ENV CC=gcc-10 CXX=g++-10
+WORKDIR /src
