@@ -20,7 +20,18 @@ add_subdirectory(${HPL1_ENGINE_DIR} engine)
 
 # The engine looks for its shaders under rehatched/core/programs beside the
 # game data, so they are placed there rather than referenced in place.
-file(COPY ${HPL1_SHADER_DIR}/ DESTINATION ${CMAKE_SOURCE_DIR}/rehatched/core/programs)
+#
+# configure_file rather than file(COPY): it records each shader as something
+# the build depends on, so editing one re-copies it on the next build. A plain
+# file(COPY) runs only when cmake configures, which silently leaves the game
+# running yesterday's shaders while the source says otherwise - an afternoon
+# was lost to measuring exactly that.
+file(GLOB hpl_shaders CONFIGURE_DEPENDS ${HPL1_SHADER_DIR}/*)
+foreach(shader ${hpl_shaders})
+    get_filename_component(shader_name ${shader} NAME)
+    configure_file(${shader}
+        ${CMAKE_SOURCE_DIR}/rehatched/core/programs/${shader_name} COPYONLY)
+endforeach()
 
 # ---- game --------------------------------------------------------------------
 file(GLOB_RECURSE game_src ${CMAKE_SOURCE_DIR}/PenumbraOverture/src/*.cpp)
