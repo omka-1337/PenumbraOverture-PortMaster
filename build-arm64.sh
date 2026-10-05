@@ -6,7 +6,7 @@ set -eu
 
 cd "$(dirname "$0")"
 
-ENGINE_DIR=${HPL1_ENGINE_DIR:-$PWD/../../HPL1-Fledged}
+ENGINE_DIR=${HPL1_ENGINE_DIR:-$PWD/../HPL1-Fledged}
 if [ ! -f "$ENGINE_DIR/CMakeLists.txt" ]; then
 	echo "HPL1 engine not found at $ENGINE_DIR" >&2
 	echo "Set HPL1_ENGINE_DIR to point at it." >&2

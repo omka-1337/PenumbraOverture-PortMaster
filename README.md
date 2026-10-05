@@ -4,7 +4,7 @@ Thanks to [Frictional Games](https://store.steampowered.com/app/22180/) for crea
 
 **Boots and plays.** Confirmed on an RG40XX running ROCKNIX on 2026-10-04. A full playthrough on the device has not been done yet, and no other firmware has been tried, so treat the other CFWs as untested rather than as working.
 
-The game is paid, so only the engine ships here. That engine is [HPL1 Fledged](../../HPL1-Fledged), a continuation of zenmumbler's HPL1 Rehatched, which is in turn Frictional Games' own GPL release of HPL1 with the dead NVIDIA Cg shader toolkit replaced by GLSL. You supply the game's own files, about 787 MB of them.
+The game is paid, so only the engine ships here. That engine is [HPL1 Fledged](../HPL1-Fledged), a continuation of zenmumbler's HPL1 Rehatched, which is in turn Frictional Games' own GPL release of HPL1 with the dead NVIDIA Cg shader toolkit replaced by GLSL. You supply the game's own files, about 787 MB of them.
 
 ## Contents
 
@@ -97,7 +97,7 @@ Two things are not on the pad yet. The notebook and the personal notes, `N` and 
 
 ## Compile
 
-The engine is a separate repository, [HPL1 Fledged](../../HPL1-Fledged), and this repository holds the game sources, the packaging and the launch script. Clone them side by side.
+The engine is a separate repository, [HPL1 Fledged](../HPL1-Fledged), and this repository holds the game sources, the packaging and the launch script. Clone them side by side.
 
 For the device, the build runs in the PortMaster container, so register arm64 emulation once:
 

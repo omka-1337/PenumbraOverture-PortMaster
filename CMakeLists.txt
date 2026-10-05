@@ -7,7 +7,7 @@ set(CMAKE_C_STANDARD 11)
 
 # The engine lives in its own repository; point at a different checkout with
 #   cmake -DHPL1_ENGINE_DIR=/path/to/HPL1-Fledged
-set(HPL1_ENGINE_DIR "${CMAKE_SOURCE_DIR}/../../HPL1-Fledged"
+set(HPL1_ENGINE_DIR "${CMAKE_SOURCE_DIR}/../HPL1-Fledged"
     CACHE PATH "Where the HPL1 engine is checked out")
 
 if(NOT EXISTS "${HPL1_ENGINE_DIR}/CMakeLists.txt")
