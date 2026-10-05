@@ -108,6 +108,12 @@ docker run --privileged --rm tonistiigi/binfmt --install arm64
 
 That produces `build-arm64/PenumbraOverture`, a 7 MB aarch64 binary needing glibc 2.29 or newer and linking `libGLESv2`. `Dockerfile.arm64` sits on top of `monkeyx/retro_builder:arm64` and adds g++-10, because the image's gcc 9 has no `<span>`.
 
+`./deploy.sh` pushes that binary, the shaders, the launch script and the pad mapping to a device over ssh, leaving the game data alone. The address moves with DHCP, so override it when it does:
+
+```
+PENUMBRA_DEVICE=root@192.168.1.50 ./deploy.sh
+```
+
 For a desktop build, to work on the engine itself:
 
 ```
