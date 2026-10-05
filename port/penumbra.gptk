@@ -41,3 +41,12 @@ right_analog_left = mouse_movement_left
 right_analog_right = mouse_movement_right
 
 deadzone_scale = 6
+
+# The RG40XX stick is on or off: it reports no tilt, so every push sends the
+# pointer at one speed and there is no fine control to be had from the stick
+# itself. gptokeyb's own default of 512 is far too fast for aiming at an
+# inventory slot, so the base speed is set here and the engine adds the ramp on
+# top (HPL_MOUSE_ACCEL in the launch script). Raise this for a faster pointer,
+# lower it for a steadier one.
+mouse_scale = 128
+mouse_delay = 16

@@ -34,16 +34,15 @@ export LD_LIBRARY_PATH="$GAME_DIR/libs:$LD_LIBRARY_PATH"
 # The engine keeps settings and saves under $HOME, which must be writable.
 export HOME="$GAME_DIR"
 
-# A thumb stick has to drive both the view and the cursor in the inventory, and
-# one speed cannot do both: fast enough to turn round is far too fast to land on
-# a button. So the engine takes the cursor over and ramps it. The numbers are
-# <top speed>:<how fast it gets there>:<starting speed>, so this starts at a
-# third of raw speed, which is what makes the menus usable, and climbs to two
-# and a half times over about a second of held movement. Raise the last number
-# if the cursor feels sluggish, lower it if it overshoots. Lower the middle one
-# if the speed change itself is noticeable: the pointer only moves once per
+# The stick on this device reports no tilt, only on or off, so one speed has to
+# serve both landing on an inventory slot and turning round, and no single speed
+# does. The base speed is set in penumbra.gptk (mouse_scale); this is the ramp
+# on top of it, as <top speed>:<how fast it gets there>:<starting speed>. So a
+# short push moves at the base speed and a push you hold climbs to three times
+# that over about a second, dropping back when you let go. Lower the middle
+# number if the change of speed is itself noticeable: the pointer moves once per
 # drawn frame, so a gain that climbs quickly reads as surging.
-export HPL_MOUSE_ACCEL=2.5:2:0.35
+export HPL_MOUSE_ACCEL=3:2:1
 
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
