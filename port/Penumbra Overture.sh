@@ -39,9 +39,11 @@ export HOME="$GAME_DIR"
 # a button. So the engine takes the cursor over and ramps it. The numbers are
 # <top speed>:<how fast it gets there>:<starting speed>, so this starts at a
 # third of raw speed, which is what makes the menus usable, and climbs to two
-# and a half times over about half a second of held movement. Raise the last
-# number if the cursor feels sluggish, lower it if it still overshoots.
-export HPL_MOUSE_ACCEL=2.5:4:0.35
+# and a half times over about a second of held movement. Raise the last number
+# if the cursor feels sluggish, lower it if it overshoots. Lower the middle one
+# if the speed change itself is noticeable: the pointer only moves once per
+# drawn frame, so a gain that climbs quickly reads as surging.
+export HPL_MOUSE_ACCEL=2.5:2:0.35
 
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
