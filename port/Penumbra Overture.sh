@@ -44,6 +44,12 @@ export HOME="$GAME_DIR"
 # drawn frame, so a gain that climbs quickly reads as surging.
 export HPL_MOUSE_ACCEL=3:2:1
 
+# The outdoor maps hang a 3000 particle snowfall off the camera, so it fills the
+# screen wherever you look. A Mali-G31 cannot blend that many billboards at
+# once, and the surface drops to under a frame a second. A fifth of them still
+# reads as snow. Raise it towards 1 for the full weather on a stronger device.
+export HPL_PARTICLE_SCALE=0.2
+
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
 $GPTOKEYB "PenumbraOverture" -c "./penumbra.gptk" &
