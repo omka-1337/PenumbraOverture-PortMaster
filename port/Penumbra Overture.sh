@@ -36,9 +36,7 @@ export HOME="$GAME_DIR"
 
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
-# The kernel truncates a process name to 15 characters, and the binary is one
-# longer, so gptokeyb has to be given the truncated form or Start+Select dies.
-$GPTOKEYB "PenumbraOvertur" -c "./penumbra.gptk" &
+$GPTOKEYB "PenumbraOverture" -c "./penumbra.gptk" &
 ./PenumbraOverture
 
 $ESUDO kill -9 $(pidof gptokeyb)
