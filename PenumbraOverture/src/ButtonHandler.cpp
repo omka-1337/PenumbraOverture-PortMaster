@@ -21,6 +21,7 @@
 #include "Init.h"
 #include "Player.h"
 #include "Inventory.h"
+#include "GameMessageHandler.h"
 #include "Notebook.h"
 #include "NumericalPanel.h"
 #include "IntroStory.h"
@@ -92,6 +93,14 @@ static cButtonHandlerAction gvDefaultActions[] = {
 {"Eight","Keyboard",eKey_8,false},
 {"Nine","Keyboard",eKey_9,false},
 
+// Quick slots for a gamepad. Nine slots will not fit on a handheld, so the
+// D-pad cycles through the ones that hold something and a separate button uses
+// the chosen one. These three keys are free in the game and gptokeyb knows how
+// to send them.
+{"ShortcutPrev","Keyboard",eKey_PAGEUP,false},
+{"ShortcutNext","Keyboard",eKey_PAGEDOWN,false},
+{"ShortcutUse","Keyboard",eKey_HOME,false},
+
 //Debug:
 {"DebugMenu","Keyboard",eKey_p,false},
 {"ResetGame","Keyboard",eKey_F1,false},
@@ -125,6 +134,8 @@ cButtonHandler::cButtonHandler(cInit *apInit)  : iUpdateable("ButtonHandler")
 	mpLowLevelGraphics = mpInit->mpGame->GetLowLevelGraphics();
 
 	mState = eButtonHandlerState_Game;
+
+	mlSelectedShortcut = 0;
 
 	mlNumOfActions =0;
 
@@ -195,6 +206,32 @@ void cButtonHandler::OnPostSceneDraw()
 		mpInit->mpGame->GetRenderer()->SetDebugFlags(0);
 	}
 }
+
+void cButtonHandler::CycleShortcut(int alStep)
+{
+	const int lSlots = 9;
+
+	// Walk to the next slot that holds something, so an empty quick bar does
+	// not make the D-pad feel broken. One full lap and we stop.
+	for(int i=0; i<lSlots; ++i)
+	{
+		mlSelectedShortcut = (mlSelectedShortcut + alStep + lSlots) % lSlots;
+
+		cInventorySlot *pSlot = mpInit->mpInventory->GetEquipSlot(mlSelectedShortcut);
+		cInventoryItem *pItem = pSlot ? pSlot->GetItem() : NULL;
+		if(pItem)
+		{
+			// The player cannot see which slot is selected otherwise: the quick
+			// bar is only drawn inside the inventory screen.
+			mpInit->mpGameMessageHandler->Add(pItem->GetGameName());
+			return;
+		}
+	}
+
+	mpInit->mpGameMessageHandler->Add(kTranslate("Inventory", "Empty"));
+}
+
+//-----------------------------------------------------------------------
 
 void cButtonHandler::Update(float afTimeStep)
 {
@@ -687,6 +724,11 @@ void cButtonHandler::Update(float afTimeStep)
 					if(mpInput->BecameTriggerd("Seven")) mpPlayer->StartInventoryShortCut(6);
 					if(mpInput->BecameTriggerd("Eight")) mpPlayer->StartInventoryShortCut(7);
 					if(mpInput->BecameTriggerd("Nine")) mpPlayer->StartInventoryShortCut(8);
+
+					if(mpInput->BecameTriggerd("ShortcutPrev")) CycleShortcut(-1);
+					if(mpInput->BecameTriggerd("ShortcutNext")) CycleShortcut(1);
+					if(mpInput->BecameTriggerd("ShortcutUse"))
+						mpPlayer->StartInventoryShortCut(mlSelectedShortcut);
 				}
 			}
 		}

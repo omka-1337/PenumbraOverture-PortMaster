@@ -20,10 +20,15 @@ r2 = lctrl
 l3 = q
 r3 = e
 
-up = up
-down = down
-left = left
-right = right
+# The D-pad used to send the arrow keys, which this game never reads, so four
+# buttons did nothing. The quick slots are nine and the pad has no room for
+# nine, so left and right step through the slots that hold something, up uses
+# the one you landed on, and down opens the notebook, which had no button
+# at all before.
+up = home
+down = n
+left = pageup
+right = pagedown
 
 left_analog_up = w
 left_analog_down = s

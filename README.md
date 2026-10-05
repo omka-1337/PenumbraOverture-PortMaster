@@ -88,12 +88,19 @@ The engine reads a few environment variables at startup, which is the cheapest w
 | R2 | Left Ctrl | Crouch |
 | L3 | Q | Lean left |
 | R3 | E | Lean right |
+| D-pad left/right | Page Up/Down | Step through the quick slots that hold something |
+| D-pad up | Home | Use the quick slot you stepped to |
+| D-pad down | N | Notebook |
 | Select | Tab | Inventory |
 | Start | Escape | Menu |
 
 Face button positions vary between handhelds, so A and B may sit the other way round on yours. The port remaps nothing: `gptokeyb` translates the pad into the keyboard and mouse the game already reads, and the mapping in `penumbra.gptk` names the physical buttons.
 
-Two things are not on the pad yet. The notebook and the personal notes, `N` and `P` on a keyboard, have no button, and the D-pad sends the arrow keys, which this game never reads. The D-pad is therefore the obvious home for them.
+The nine quick slots are the one thing a keyboard does better: it has `1` to `9` and the pad does not. So the D-pad steps through the slots that hold something rather than addressing them directly, naming each item as you land on it, and a second button uses it. Stepping never uses anything by itself, which matters when a slot holds something you only have one of.
+
+Looking around accelerates: a short nudge of the right stick moves at plain speed, and a movement you hold builds up to triple speed over about half a second, then drops back the moment you stop. Without that, one sensitivity has to serve both aiming at a keyhole and turning to see what is behind you, and it cannot. `HPL_MOUSE_ACCEL` in the launch script sets it, as `<top speed>:<how fast it gets there>`; delete the line for a plain constant speed.
+
+The personal notes, `P` on a keyboard, still have no button.
 
 ## Compile
 

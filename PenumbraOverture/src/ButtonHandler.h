@@ -54,7 +54,16 @@ public:
 	float mfMouseSensitivity;
 	bool mbInvertMouseY;
 	bool mbToggleCrouch;
+	/**
+	 * Steps the quick-slot selection to the next or previous slot that has
+	 * something in it, and names what it landed on. A handheld has no room for
+	 * nine buttons, so the slots are cycled rather than addressed directly.
+	 */
+	void CycleShortcut(int alStep);
+
 private:
+	int mlSelectedShortcut;
+
 	iAction * ActionFromTypeAndVal(const tString& asName,const tString& asType, const tString& asVal);
 	void TypeAndValFromAction(iAction *apAction, tString *apType, tString *apVal);
 	

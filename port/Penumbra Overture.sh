@@ -34,6 +34,12 @@ export LD_LIBRARY_PATH="$GAME_DIR/libs:$LD_LIBRARY_PATH"
 # The engine keeps settings and saves under $HOME, which must be writable.
 export HOME="$GAME_DIR"
 
+# A thumb stick has to both aim at a keyhole and turn you round, which one
+# sensitivity cannot do. This leaves a short nudge alone and lets a held
+# movement build up to triple speed over about half a second. Raise the first
+# number for faster turning, the second for a shorter run-up.
+export HPL_MOUSE_ACCEL=3:4
+
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
 $GPTOKEYB "PenumbraOverture" -c "./penumbra.gptk" &
