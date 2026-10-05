@@ -37,6 +37,11 @@ sed -e 's|ShowPreMenu="[^"]*"|ShowPreMenu="false"|' \
     -e "s|StartPos=\"[^\"]*\"|StartPos=\"$POS\"|" \
     run/config/default_settings.cfg > "$SCRATCH/settings.cfg"
 
+# Keep whatever the player had. Deleting it instead of restoring it loses
+# their resolution and key bindings, and the game only writes the file on a
+# clean exit, so it does not come back by itself.
+ssh "$DEVICE" "[ -f '$PROFILE/settings.cfg' ] && cp '$PROFILE/settings.cfg' '$PROFILE/settings.cfg.bench-backup' || true"
+
 scp -q "$SCRATCH/settings.cfg" "$DEVICE:$PROFILE/settings.cfg"
 
 echo "running $MAP for ${SECONDS_TO_RUN}s on $DEVICE ${EXTRA_ENV:+with $EXTRA_ENV}"
@@ -59,9 +64,13 @@ ssh "$DEVICE" "
 
 scp -q "$DEVICE:$PROFILE/hpl.log" "$SCRATCH/hpl.log" 2>/dev/null || true
 
-# Put the device back the way it was: with no profile the game shows its menus,
-# which is what a player expects to find.
-ssh "$DEVICE" "rm -f '$PROFILE/settings.cfg'"
+# Put the player's own profile back, or clear ours if there was none.
+ssh "$DEVICE" "
+	if [ -f '$PROFILE/settings.cfg.bench-backup' ]; then
+		mv '$PROFILE/settings.cfg.bench-backup' '$PROFILE/settings.cfg'
+	else
+		rm -f '$PROFILE/settings.cfg'
+	fi"
 
 # The first interval covers loading, so it is dropped: it measures the disk,
 # not the renderer.
