@@ -98,7 +98,9 @@ Face button positions vary between handhelds, so A and B may sit the other way r
 
 The nine quick slots are the one thing a keyboard does better: it has `1` to `9` and the pad does not. So the D-pad steps through the slots that hold something rather than addressing them directly, naming each item as you land on it, and a second button uses it. Stepping never uses anything by itself, which matters when a slot holds something you only have one of.
 
-Looking around accelerates: a short nudge of the right stick moves at plain speed, and a movement you hold builds up to triple speed over about half a second, then drops back the moment you stop. Without that, one sensitivity has to serve both aiming at a keyhole and turning to see what is behind you, and it cannot. `HPL_MOUSE_ACCEL` in the launch script sets it, as `<top speed>:<how fast it gets there>`; delete the line for a plain constant speed.
+The right stick accelerates, and this applies to the cursor in the inventory and the menus as much as to looking around: with acceleration on, the engine stops following the system pointer and drives its own. One speed cannot serve both jobs, because fast enough to turn and see what is behind you is far too fast to land on a button. So a short nudge moves slowly and precisely, and a movement you hold climbs to full speed over about half a second, dropping back the moment you stop.
+
+`HPL_MOUSE_ACCEL` in the launch script sets it, as `<top speed>:<how fast it gets there>:<starting speed>`. The starting speed is the one to change first: lower it if the cursor overshoots what you are aiming at, raise it if it crawls. Deleting the line gives the raw constant speed the pad sends.
 
 The personal notes, `P` on a keyboard, still have no button.
 

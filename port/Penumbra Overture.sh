@@ -34,11 +34,14 @@ export LD_LIBRARY_PATH="$GAME_DIR/libs:$LD_LIBRARY_PATH"
 # The engine keeps settings and saves under $HOME, which must be writable.
 export HOME="$GAME_DIR"
 
-# A thumb stick has to both aim at a keyhole and turn you round, which one
-# sensitivity cannot do. This leaves a short nudge alone and lets a held
-# movement build up to triple speed over about half a second. Raise the first
-# number for faster turning, the second for a shorter run-up.
-export HPL_MOUSE_ACCEL=3:4
+# A thumb stick has to drive both the view and the cursor in the inventory, and
+# one speed cannot do both: fast enough to turn round is far too fast to land on
+# a button. So the engine takes the cursor over and ramps it. The numbers are
+# <top speed>:<how fast it gets there>:<starting speed>, so this starts at a
+# third of raw speed, which is what makes the menus usable, and climbs to two
+# and a half times over about half a second of held movement. Raise the last
+# number if the cursor feels sluggish, lower it if it still overshoots.
+export HPL_MOUSE_ACCEL=2.5:4:0.35
 
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
