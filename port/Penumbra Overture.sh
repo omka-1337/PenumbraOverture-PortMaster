@@ -44,11 +44,12 @@ export HOME="$GAME_DIR"
 # drawn frame, so a gain that climbs quickly reads as surging.
 export HPL_MOUSE_ACCEL=3:2:1
 
-# The outdoor maps hang a 3000 particle snowfall off the camera, so it fills the
-# screen wherever you look. A Mali-G31 cannot blend that many billboards at
-# once, and the surface drops to under a frame a second. A fifth of them still
-# reads as snow. Raise it towards 1 for the full weather on a stronger device.
-export HPL_PARTICLE_SCALE=0.2
+# HPL_PARTICLE_SCALE thins every particle system, and the outdoor snowfall is
+# what it exists for: 3000 camera-attached billboards cost about a third of the
+# frame rate out on the surface, 19.4 fps against 25.1 with a fifth of them.
+# It is left at full here because 19.4 is what the indoor maps run at anyway,
+# so the snow is not what makes the surface slow. Set it to 0.5 for 22.6 fps if
+# you would rather have the speed than the weather.
 
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 

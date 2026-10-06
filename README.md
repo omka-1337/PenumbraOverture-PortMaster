@@ -69,6 +69,7 @@ The engine reads a few environment variables at startup, which is the cheapest w
 | `HPL_GAMMA` | from config | A number overrides gamma. |
 | `HPL_BUMP` | on | `0` lights surfaces flat instead of through their normal maps. |
 | `HPL_GLES` | auto | Forces the GLES path on or off. The aarch64 build is GLES only, so there is nothing to force here. |
+| `HPL_PARTICLE_SCALE` | `1` | Thins every particle system. The outdoor snowfall is 3000 camera-attached billboards and costs about a third of the frame rate: 19.4 fps outside at full, 22.6 at `0.5`, 25.1 at `0.2`. |
 
 `HPL_NO_LIGHTS`, `HPL_FRAME_TRACE` and `HPL_SCREENSHOT` also exist but are debugging aids, not settings worth shipping.
 
