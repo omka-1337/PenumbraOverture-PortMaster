@@ -44,13 +44,13 @@ chmod +x "$GAME_DIR/PenumbraOverture"
 # Only OpenAL is carried along; SDL2 and GLES come from the system.
 export LD_LIBRARY_PATH="$GAME_DIR/libs:$LD_LIBRARY_PATH"
 
-# The engine keeps settings and saves under $HOME, which must be writable. Its
-# own folder rather than the game folder, so the saves are not mixed in with the
-# player's copy of the game, and XDG is pointed at it too or it would still
-# refer to the real home from before this line.
-export HOME="$GAME_DIR/home"
-mkdir -p "$HOME/.local/share"
-export XDG_DATA_HOME="$HOME/.local/share"
+# The engine keeps settings and saves under $HOME, which must be writable.
+#
+# This is the game folder itself, not a subfolder of it. A tidier layout was
+# tried and it orphaned every existing save, because the saves are already at
+# $GAME_DIR/.frictionalgames and moving $HOME moves where the game looks for
+# them. Anyone who has played this port has saves in that place; leave it alone.
+export HOME="$GAME_DIR"
 
 # The stick on this device reports no tilt, only on or off, so one speed has to
 # serve both landing on an inventory slot and turning round, and no single speed
