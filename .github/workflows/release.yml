@@ -1,0 +1,97 @@
+name: Release
+
+# Pushing a tag such as v1.0 builds penumbra.zip and publishes it as a GitHub
+# release. Running the workflow by hand builds the same zip and leaves it on
+# the run page as an artifact, without releasing anything, which is the way to
+# try a build on a device first.
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      engine_ref:
+        description: HPL1 Fledged branch, tag or commit to build against
+        default: master
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    # An arm64 runner, so the PortMaster container runs natively. On an x86
+    # machine the same scripts go through QEMU, which is many times slower.
+    runs-on: ubuntu-24.04-arm
+    outputs:
+      engine: ${{ steps.engine.outputs.sha }}
+    steps:
+      # Side by side, the way the build scripts expect to find them.
+      - uses: actions/checkout@v7
+        with:
+          path: PenumbraOverture-PortMaster
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: omka-1337/HPL1-Fledged
+          ref: ${{ inputs.engine_ref || 'master' }}
+          path: HPL1-Fledged
+          persist-credentials: false
+
+      - id: engine
+        run: echo "sha=$(git -C HPL1-Fledged rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Build the game
+        run: PenumbraOverture-PortMaster/build-arm64.sh
+      - name: Build OpenAL
+        run: PenumbraOverture-PortMaster/build-openal-arm64.sh
+      - name: Package
+        run: PenumbraOverture-PortMaster/package.sh
+
+      # Uploaded as it is, so the run page offers penumbra.zip itself rather
+      # than a zip with penumbra.zip inside.
+      - uses: actions/upload-artifact@v7
+        with:
+          path: PenumbraOverture-PortMaster/build-arm64/penumbra.zip
+          archive: false
+          if-no-files-found: error
+
+  release:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # skip-decompress, or the action sees a zip and unpacks it.
+      - uses: actions/download-artifact@v8
+        with:
+          name: penumbra.zip
+          path: dist
+          skip-decompress: true
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+          ENGINE: ${{ needs.build.outputs.engine }}
+        run: |
+          notes=$(cat <<EOF
+          Drop \`penumbra.zip\` into PortMaster's \`autoinstall\` folder, or install it over ssh:
+
+              harbourmaster install https://github.com/$GH_REPO/releases/download/$TAG/penumbra.zip
+
+          Only the engine ships here. Copy the game files from your own copy of Penumbra: Overture into \`ports/penumbra/\`, as the [README](https://github.com/$GH_REPO/blob/$TAG/README.md#2-copy-the-game-across) describes.
+
+          Built from $GITHUB_SHA against omka-1337/HPL1-Fledged@$ENGINE.
+          EOF
+          )
+
+          # A re-run of the same tag replaces the zip instead of failing.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/penumbra.zip --clobber
+          else
+            gh release create "$TAG" dist/penumbra.zip --verify-tag \
+              --title "Penumbra: Overture $TAG" \
+              --notes "$notes" --generate-notes
+          fi
