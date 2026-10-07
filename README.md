@@ -33,12 +33,12 @@ You need: your own copy of Penumbra: Overture, a PC to copy it from, a handheld 
 
 ### 1. Install the port
 
-Drop `penumbra.zip` into PortMaster's `autoinstall` folder and run PortMaster, which unpacks it and clears the folder.
+Download `penumbra.zip` from the [latest release](https://github.com/omka-1337/PenumbraOverture-PortMaster/releases/latest), drop it into PortMaster's `autoinstall` folder and run PortMaster, which unpacks it and clears the folder.
 
 Over ssh it is one command instead:
 
 ```
-harbourmaster install <url of the zip>
+harbourmaster install https://github.com/omka-1337/PenumbraOverture-PortMaster/releases/latest/download/penumbra.zip
 ```
 
 Either way you end up with `Penumbra Overture.sh` and a `penumbra/` folder in `ports/`. The folder holds the engine, its shaders and an OpenAL build, and waits for the game.
@@ -133,6 +133,17 @@ That produces `build-arm64/PenumbraOverture`, a 7 MB aarch64 binary needing glib
 ```
 PENUMBRA_DEVICE=root@192.168.1.50 ./deploy.sh
 ```
+
+The zip that PortMaster installs takes two more steps. The OpenAL that ships in `libs/` is built from source rather than taken from the container, because the container's own is linked against sndio, which the handhelds do not have:
+
+```
+./build-openal-arm64.sh
+./package.sh
+```
+
+That leaves `build-arm64/penumbra.zip`. Only files git tracks are taken from `rehatched/`, so retail textures or sounds dropped there as local overrides stay out of it.
+
+Releases are built the same way by `.github/workflows/release.yml`, on GitHub's arm64 runners against the engine's `master`. Pushing a tag such as `v1.0` publishes the zip as a release; running the workflow by hand from the Actions tab builds it without releasing, to try on a device first.
 
 For a desktop build, to work on the engine itself:
 
