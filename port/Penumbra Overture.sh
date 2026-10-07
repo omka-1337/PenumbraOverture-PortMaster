@@ -9,6 +9,8 @@ elif [ -d "/opt/tools/PortMaster/" ]; then
   controlfolder="/opt/tools/PortMaster"
 elif [ -d "$XDG_DATA_HOME/PortMaster/" ]; then
   controlfolder="$XDG_DATA_HOME/PortMaster"
+elif [ -d "/storage/roms/ports/PortMaster/" ]; then
+  controlfolder="/storage/roms/ports/PortMaster"
 else
   controlfolder="/roms/ports/PortMaster"
 fi
@@ -20,8 +22,19 @@ get_controls
 
 PORTS_DIR="/$directory/ports"
 GAME_DIR="${PORTS_DIR}/penumbra"
+
+# $directory is whatever control.txt decided, and it is not the same everywhere.
+# Fall back rather than carry on in the wrong place: everything below is
+# relative to this, so a wrong guess here fails in confusing ways much later.
+if [ ! -d "$GAME_DIR" ]; then GAME_DIR="/roms/ports/penumbra"; fi
+if [ ! -d "$GAME_DIR" ]; then GAME_DIR="/storage/roms/ports/penumbra"; fi
+if [ ! -d "$GAME_DIR" ]; then
+  echo "ERROR: cannot find the penumbra folder under /$directory/ports, /roms/ports or /storage/roms/ports"
+  exit 1
+fi
+
 LOG_FILE="${GAME_DIR}/log.txt"
-cd "$GAME_DIR"
+cd "$GAME_DIR" || exit 1
 
 exec > >(tee "$LOG_FILE") 2>&1
 
@@ -31,8 +44,13 @@ chmod +x "$GAME_DIR/PenumbraOverture"
 # Only OpenAL is carried along; SDL2 and GLES come from the system.
 export LD_LIBRARY_PATH="$GAME_DIR/libs:$LD_LIBRARY_PATH"
 
-# The engine keeps settings and saves under $HOME, which must be writable.
-export HOME="$GAME_DIR"
+# The engine keeps settings and saves under $HOME, which must be writable. Its
+# own folder rather than the game folder, so the saves are not mixed in with the
+# player's copy of the game, and XDG is pointed at it too or it would still
+# refer to the real home from before this line.
+export HOME="$GAME_DIR/home"
+mkdir -p "$HOME/.local/share"
+export XDG_DATA_HOME="$HOME/.local/share"
 
 # The stick on this device reports no tilt, only on or off, so one speed has to
 # serve both landing on an inventory slot and turning round, and no single speed
@@ -53,10 +71,17 @@ export HPL_MOUSE_ACCEL=3:2:1
 
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
-$GPTOKEYB "PenumbraOverture" -c "./penumbra.gptk" &
-./PenumbraOverture
+$GPTOKEYB "PenumbraOverture" -c "$GAME_DIR/penumbra.gptk" &
+GPTOKEYB_PID=$!
 
-$ESUDO kill -9 $(pidof gptokeyb)
+"$GAME_DIR/PenumbraOverture"
+
+# pidof prints nothing when it is already gone, and kill with no argument then
+# prints its usage into the log and returns an error, which looks like a fault
+# in the port. Kill what was actually started.
+if [ -n "$GPTOKEYB_PID" ] && kill -0 "$GPTOKEYB_PID" 2>/dev/null; then
+  $ESUDO kill -9 "$GPTOKEYB_PID" 2>/dev/null
+fi
 unset SDL_GAMECONTROLLERCONFIG
 $ESUDO systemctl restart oga_events &
 printf "\033c" > /dev/tty0
