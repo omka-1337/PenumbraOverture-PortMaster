@@ -44,8 +44,11 @@ jobs:
         run: PenumbraOverture-PortMaster/build-arm64.sh
       - name: Build OpenAL
         run: PenumbraOverture-PortMaster/build-openal-arm64.sh
+      # The arm64 runner image is leaner than the x86 one; zip may be missing.
       - name: Package
-        run: PenumbraOverture-PortMaster/package.sh
+        run: |
+          command -v zip >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq zip; }
+          PenumbraOverture-PortMaster/package.sh
 
       # Uploaded as it is, so the run page offers penumbra.zip itself rather
       # than a zip with penumbra.zip inside.

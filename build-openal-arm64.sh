@@ -34,6 +34,10 @@ docker build -q -f Dockerfile.arm64 -t penumbra-arm64-builder . >/dev/null
 # The REQUIRE switches turn a missing backend into a configure error. Without
 # them OpenAL quietly builds with neither, and the game then runs in silence.
 #
+# 1.23.1 asks for CMake 3.0.2, and the container's CMake 4 refuses anything
+# older than 3.5 unless told to treat the request as 3.5. Older CMakes ignore
+# the setting.
+#
 # The NEEDED check at the end is the point of the exercise: anything past the
 # C and C++ runtimes is a library the device may not have.
 docker run --rm --platform linux/arm64 \
@@ -44,6 +48,7 @@ docker run --rm --platform linux/arm64 \
 		set -e
 		cmake -S /src/'"$SRC"' -B /src/'"$SRC"'/build -DCMAKE_BUILD_TYPE=Release \
 			-DCMAKE_C_COMPILER=gcc-10 -DCMAKE_CXX_COMPILER=g++-10 \
+			-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 			-DALSOFT_UTILS=OFF -DALSOFT_EXAMPLES=OFF -DALSOFT_INSTALL=OFF \
 			-DALSOFT_BACKEND_SNDIO=OFF \
 			-DALSOFT_REQUIRE_ALSA=ON -DALSOFT_REQUIRE_PULSEAUDIO=ON >/dev/null
