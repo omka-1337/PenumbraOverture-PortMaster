@@ -17,8 +17,8 @@ l1 = mouse_right
 r1 = mouse_left
 l2 = e
 r2 = q
-l3 = lshift
-r3 = lctrl
+l3 = leftshift
+r3 = leftctrl
 
 # The D-pad used to send the arrow keys, which this game never reads, so four
 # buttons did nothing. The quick slots are nine and the pad has no room for

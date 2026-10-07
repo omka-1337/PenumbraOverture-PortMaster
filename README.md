@@ -92,14 +92,14 @@ The engine reads a few environment variables at startup, which is the cheapest w
 | Right stick | Mouse | Look, and drag things while Interact is held |
 | R1 | Left mouse | Interact: hold and pull to open doors, drawers and valves |
 | L1 | Right mouse | Examine |
-| A | Space | Jump |
-| B | R | Interaction mode |
-| X | F | Flashlight |
-| Y | G | Glowstick |
-| L2 | Left Shift | Run |
-| R2 | Left Ctrl | Crouch |
-| L3 | Q | Lean left |
-| R3 | E | Lean right |
+| A | R | Interaction mode |
+| B | Space | Jump |
+| X | G | Glowstick |
+| Y | F | Flashlight |
+| L2 | Q | Lean left |
+| R2 | E | Lean right |
+| L3 | Left Shift | Run |
+| R3 | Left Ctrl | Crouch |
 | D-pad left/right | Page Up/Down | Step through the quick slots that hold something |
 | D-pad up | Home | Use the quick slot you stepped to |
 | D-pad down | N | Notebook |
