@@ -412,16 +412,22 @@ void cIntroStory::OnDraw()
 		cColor fillColor{1,fAlpha};
 		cColor edgeColor{0,fAlpha};
 
-		mpFont->Draw({400,  300,   32}, 18, fillColor, eFontAlign_Center, text);
-		mpFont->Draw({400+1,300+1, 30}, 18, edgeColor, eFontAlign_Center, text);
-		mpFont->Draw({400-1,300-1, 30}, 18, edgeColor, eFontAlign_Center, text);
-		mpFont->Draw({400-1,300+1, 30}, 18, edgeColor, eFontAlign_Center, text);
-		mpFont->Draw({400+1,300-1, 30}, 18, edgeColor, eFontAlign_Center, text);
+		// Enlarged for the same reason as the in game subtitles, but not as far:
+		// this one is centred and not wrapped, so a long line has nowhere to go.
+		const float fCentreSize = 23;
+
+		mpFont->Draw({400,  300,   32}, fCentreSize, fillColor, eFontAlign_Center, text);
+		mpFont->Draw({400+1,300+1, 30}, fCentreSize, edgeColor, eFontAlign_Center, text);
+		mpFont->Draw({400-1,300-1, 30}, fCentreSize, edgeColor, eFontAlign_Center, text);
+		mpFont->Draw({400-1,300+1, 30}, fCentreSize, edgeColor, eFontAlign_Center, text);
+		mpFont->Draw({400+1,300-1, 30}, fCentreSize, edgeColor, eFontAlign_Center, text);
 	}
 	
 	if(mpInit->mbSubtitles)
 	{
-		mpFont->DrawWordWrap({15,526, 30}, 760, 18, {16,16}, cColor::White, eFontAlign_Left, msMessage);
+		// Moved up as well as enlarged: taller rows would otherwise run off the
+		// bottom of the screen once the line wraps.
+		mpFont->DrawWordWrap({15,505, 30}, 760, 24, {21,21}, cColor::White, eFontAlign_Left, msMessage);
 	}
 }
 

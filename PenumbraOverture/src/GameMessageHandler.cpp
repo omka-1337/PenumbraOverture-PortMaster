@@ -101,22 +101,31 @@ void cGameMessage::Draw(FontData *apFont)
 	if(mbActive == false) return;
 	
 	float fSide=30;
+
+	// These are the character's thoughts, read once, while the game is moving,
+	// on a screen held at arm's length. 14 was picked for a monitor and is too
+	// small on a handheld: a tester could read the notebook, which is dark text
+	// on a lit page you stand still for, but not these. The row height keeps
+	// its old ratio to the size.
+	const float fSize = 20;
+	const float fRow = 23;
+
 	if(mpMessHandler->mbBlackText)
 	{
-		apFont->DrawWordWrap(cVector3f(fSide, 300,152),800 - fSide*2,16,14,cColor(0,mfFade),
+		apFont->DrawWordWrap(cVector3f(fSide, 300,152),800 - fSide*2,fRow,fSize,cColor(0,mfFade),
 			eFontAlign_Left,msText);
 	}
 	else
 	{
-		apFont->DrawWordWrap(cVector3f(fSide, 300,152),800 - fSide*2,16,14,cColor(1,1,1,mfFade),
+		apFont->DrawWordWrap(cVector3f(fSide, 300,152),800 - fSide*2,fRow,fSize,cColor(1,1,1,mfFade),
 							eFontAlign_Left,msText);
-		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(1,1,-1),800 - fSide*2,16,14,cColor(0,0,0,mfFade),
+		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(1,1,-1),800 - fSide*2,fRow,fSize,cColor(0,0,0,mfFade),
 							eFontAlign_Left,msText);
-		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(-1,-1,-1),800 - fSide*2,16,14,cColor(0,0,0,mfFade),
+		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(-1,-1,-1),800 - fSide*2,fRow,fSize,cColor(0,0,0,mfFade),
 							eFontAlign_Left,msText);
-		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(1,-1,-1),800 - fSide*2,16,14,cColor(0,0,0,mfFade),
+		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(1,-1,-1),800 - fSide*2,fRow,fSize,cColor(0,0,0,mfFade),
 							eFontAlign_Left,msText);
-		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(-1,1,-1),800 - fSide*2,16,14,cColor(0,0,0,mfFade),
+		apFont->DrawWordWrap(cVector3f(fSide, 300,151) + cVector3f(-1,1,-1),800 - fSide*2,fRow,fSize,cColor(0,0,0,mfFade),
 							eFontAlign_Left,msText);
 	}
 }
