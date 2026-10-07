@@ -1927,7 +1927,8 @@ void cMainMenu::OnDraw()
 	//Draw tip
 	if(msButtonTip != _W(""))
 	{
-		mpTipFont->DrawWordWrap(cVector3f(10,570,150),780,13,12,cColor(1,1),
+		// Raised with the rest; moved up so the taller rows still fit on screen.
+		mpTipFont->DrawWordWrap(cVector3f(10,556,150),780,18,16,cColor(1,1),
 								eFontAlign_Left,msButtonTip.c_str());
 	}
 
@@ -2539,15 +2540,15 @@ void cMainMenu::CreateWidgets()
 	if(bFirstStart)
 	{
 		vPos = cVector3f(40, 190, 40);
-		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "Welcome"),15,eFontAlign_Left));
+		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "Welcome"),18,eFontAlign_Left));
 		vPos.y += 18;
-		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "Too Improve"),15,eFontAlign_Left));
+		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "Too Improve"),18,eFontAlign_Left));
 		vPos.y += 28;
-		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip1"),15,eFontAlign_Left));
+		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip1"),18,eFontAlign_Left));
 		vPos.y += 18;
-		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip2"),15,eFontAlign_Left));
+		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip2"),18,eFontAlign_Left));
 		vPos.y += 18;
-		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip3"),15,eFontAlign_Left));
+		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip3"),18,eFontAlign_Left));
 		vPos.y += 28;
 		vPos.x = 395;
 		cMainMenuWidget *pGammaFirstButton = new cMainMenuWidget_Gamma(mpInit,vPos,kTranslate("MainMenu","Gamma:"),20,eFontAlign_Right,1);
@@ -2566,7 +2567,7 @@ void cMainMenu::CreateWidgets()
 																			eGfxMaterial::DiffuseAlpha,
 																			cColor(1,1)));
 		vPos.y+=205;
-		//AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu""StartTip4"),15,eFontAlign_Left); 
+		//AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu""StartTip4"),18,eFontAlign_Left); 
 		//vPos.y += 28;
 		AddWidgetToState(eMainMenuState_FirstStart,new cMainMenuWidget_Button(mpInit,vPos,kTranslate("MainMenu","OK"),eMainMenuState_Start,20,eFontAlign_Center));
 	}
@@ -2613,15 +2614,15 @@ void cMainMenu::CreateWidgets()
 	//vPos.y += 34;
 	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_NewGame(mpInit,vPos,kTranslate("MainMenu","Easy"),24,eFontAlign_Center,eGameDifficulty_Easy)); 
 	vPos.y += 30;
-	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","EasyDesc"),16,eFontAlign_Center)); 
+	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","EasyDesc"),18,eFontAlign_Center)); 
 	vPos.y += 42;
 	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_NewGame(mpInit,vPos,kTranslate("MainMenu","Normal"),24,eFontAlign_Center,eGameDifficulty_Normal)); 
 	vPos.y += 30;
-	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","NormalDesc"),16,eFontAlign_Center)); 
+	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","NormalDesc"),18,eFontAlign_Center)); 
 	vPos.y += 42;
 	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_NewGame(mpInit,vPos,kTranslate("MainMenu","Hard"),24,eFontAlign_Center,eGameDifficulty_Hard)); 
 	vPos.y += 30;
-	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","HardDesc"),16,eFontAlign_Center)); 
+	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","HardDesc"),18,eFontAlign_Center)); 
 	vPos.y +=46;
 	AddWidgetToState(eMainMenuState_NewGame,new cMainMenuWidget_Button(mpInit,vPos,kTranslate("MainMenu","Back"),eMainMenuState_Start,22,eFontAlign_Center));
 
@@ -2730,14 +2731,14 @@ void cMainMenu::CreateWidgets()
 		vPos.y += 170;
 		vPos.x = vTextStart.x + 20;
 		
-		AddWidgetToState(state,new cMainMenuWidget_LoadSaveGame(mpInit,vPos,kTranslate("MainMenu","Load"),17,eFontAlign_Left,sDir,(int)i)); 
+		AddWidgetToState(state,new cMainMenuWidget_LoadSaveGame(mpInit,vPos,kTranslate("MainMenu","Load"),18,eFontAlign_Left,sDir,(int)i)); 
 		
 		vPos.x += 70;
 		if(i!=2)
-			AddWidgetToState(state,new cMainMenuWidget_FavoriteSaveGame(mpInit,vPos,kTranslate("MainMenu","Add To Favorites"),17,eFontAlign_Left,sDir,(int)i)); 
+			AddWidgetToState(state,new cMainMenuWidget_FavoriteSaveGame(mpInit,vPos,kTranslate("MainMenu","Add To Favorites"),18,eFontAlign_Left,sDir,(int)i)); 
 		
 		vPos.x += 205;
-		AddWidgetToState(state,new cMainMenuWidget_RemoveSaveGame(mpInit,vPos,kTranslate("MainMenu","Remove"),17,eFontAlign_Left,sDir,(int)i)); 
+		AddWidgetToState(state,new cMainMenuWidget_RemoveSaveGame(mpInit,vPos,kTranslate("MainMenu","Remove"),18,eFontAlign_Left,sDir,(int)i)); 
 		
 		
         
@@ -3034,9 +3035,9 @@ void cMainMenu::CreateWidgets()
 	
 	vPos.y +=25;
 	AddWidgetToState(eMainMenuState_OptionsGame, new cMainMenuWidget_Text(mpInit,cVector3f(vPos-cVector3f(12,0,0)),
-										kTranslate("MainMenu","VoiceLanguange:"),12,eFontAlign_Right));
+										kTranslate("MainMenu","VoiceLanguange:"),18,eFontAlign_Right));
 	AddWidgetToState(eMainMenuState_OptionsGame, new cMainMenuWidget_Text(mpInit,cVector3f(vPos),
-										kTranslate("MainMenu","SetThisToLanguageOfVoice"),12,eFontAlign_Left));
+										kTranslate("MainMenu","SetThisToLanguageOfVoice"),18,eFontAlign_Left));
 	vPos.y += 25;
 	
 	sText = kTranslate("MainMenu",gvDifficultyLevel[mpInit->mDifficulty]);
@@ -3256,7 +3257,7 @@ void cMainMenu::CreateWidgets()
 	///////////////////////////////////
 
 	vPos = vTextStart;//cVector3f(400, 260, 40);
-	AddWidgetToState(eMainMenuState_GraphicsRestart, new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","GraphicsRestart"),16,eFontAlign_Center,NULL,400));
+	AddWidgetToState(eMainMenuState_GraphicsRestart, new cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu","GraphicsRestart"),18,eFontAlign_Center,NULL,400));
 	vPos.y += 42;
 	AddWidgetToState(eMainMenuState_GraphicsRestart, new cMainMenuWidget_Button(mpInit,vPos,kTranslate("MainMenu","OK"),eMainMenuState_Options,22,eFontAlign_Center));
 	

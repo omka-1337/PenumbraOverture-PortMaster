@@ -194,12 +194,12 @@ void cInventorySlot::OnDraw()
 		if(pType && pType->GetString(mpItem)!=_W(""))
 		{
 			tWString sString = pType->GetString(mpItem);
-			mpFont->Draw(vPos + cVector3f(0,0,1),12,cColor(1,mpInit->mpInventory->GetAlpha()),eFontAlign_Left,
+			mpFont->Draw(vPos + cVector3f(0,0,1),15,cColor(1,mpInit->mpInventory->GetAlpha()),eFontAlign_Left,
 						sString.c_str());
 		}
 		else if(mpItem->HasCount())
 		{
-			mpFont->Draw(vPos + cVector3f(0,0,1),12,cColor(1,mpInit->mpInventory->GetAlpha()),eFontAlign_Left,
+			mpFont->Draw(vPos + cVector3f(0,0,1),15,cColor(1,mpInit->mpInventory->GetAlpha()),eFontAlign_Left,
 						_W("%d"),mpItem->GetCount());
 		}
 	}
@@ -1102,9 +1102,9 @@ void cInventory::OnDraw()
 		mpDrawer->DrawGfxObject(mpMessageBackground,cVector3f(0,vMessPos.y - 8,vMessPos.z-2),
 								cVector2f(800,17*4+8*2),cColor(1,1,1,fMessAlpha *0.92f));
 		
-		mpFont->DrawWordWrap(vMessPos + cVector3f(0,0,0),720,16,17,cColor(1,1,1,fMessAlpha),eFontAlign_Left,
+		mpFont->DrawWordWrap(vMessPos + cVector3f(0,0,0),720,23,20,cColor(1,1,1,fMessAlpha),eFontAlign_Left,
 								msMessage.c_str());
-		mpFont->DrawWordWrap(vMessPos + cVector3f(0,1,-1),720,16,17,cColor(0,0,0,fMessAlpha),eFontAlign_Left,
+		mpFont->DrawWordWrap(vMessPos + cVector3f(0,1,-1),720,23,20,cColor(0,0,0,fMessAlpha),eFontAlign_Left,
 								msMessage.c_str());
 	}
 	
@@ -1113,14 +1113,14 @@ void cInventory::OnDraw()
 	if(mpInit->mpRadioHandler->IsActive()==false || mpInit->mbSubtitles==false)
 	{
 		float fTextAlpha = mfAlpha*mfTextAlpha * (1- mfMessageAlpha);
-		mpFont->Draw(cVector3f(400, 460,10),19,cColor(1,1,1,fTextAlpha),eFontAlign_Center,
+		mpFont->Draw(cVector3f(400, 460,10),23,cColor(1,1,1,fTextAlpha),eFontAlign_Center,
 							_W("%ls"),msItemName.c_str());
-		mpFont->Draw(cVector3f(400+1, 460+1,9),19,cColor(0,0,0,fTextAlpha),eFontAlign_Center,
+		mpFont->Draw(cVector3f(400+1, 460+1,9),23,cColor(0,0,0,fTextAlpha),eFontAlign_Center,
 							_W("%ls"),msItemName.c_str());
 
-		mpFont->DrawWordWrap(cVector3f(80,480,10),640,16,17,cColor(1,1,1,fTextAlpha),eFontAlign_Left,
+		mpFont->DrawWordWrap(cVector3f(80,484,10),640,23,20,cColor(1,1,1,fTextAlpha),eFontAlign_Left,
 							msItemDesc.c_str());
-		mpFont->DrawWordWrap(cVector3f(80+1,480+1,9),640,16,17,cColor(0,0,0,fTextAlpha),eFontAlign_Left,
+		mpFont->DrawWordWrap(cVector3f(80+1,484+1,9),640,23,20,cColor(0,0,0,fTextAlpha),eFontAlign_Left,
 							msItemDesc.c_str());
 	}
 }
