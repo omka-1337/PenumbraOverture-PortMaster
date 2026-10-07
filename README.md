@@ -133,3 +133,7 @@ cmake -S . -B build && cmake --build build
 ```
 
 See `port/README.md` for device layout. `capture.sh` grabs a single frame for renderer comparison.
+
+## License
+
+Port files: [GPL](LICENSE)
