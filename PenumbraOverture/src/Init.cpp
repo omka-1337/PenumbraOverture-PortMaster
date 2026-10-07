@@ -93,6 +93,11 @@ bool gbUsingUserSettings=false;
 
 cInit::cInit(void)  : iUpdateable("Init")
 {
+	// Never initialised, which did not matter while Init always got far enough
+	// to assign it. It fails earlier than that when the game's data is missing,
+	// and then the error path deletes whatever rubbish the pointer held.
+	mpGame = NULL;
+
 	mbDestroyGraphics = true;
 	mbWeaponAttacking = false;
 	mbResetCache = true;
@@ -117,9 +122,44 @@ cInit::~cInit(void)
 
 //-----------------------------------------------------------------------
 
+/**
+ * The game's own data has to be beside the binary. A copy missing part of it
+ * does not fail where the file is missing: it carries on with null fonts and no
+ * physics materials and then dies on a null pointer pages later, which is what
+ * two Retroid Pocket 5 testers hit. Say what is wrong and stop.
+ */
+static bool GameDataIsPresent()
+{
+	const char *vRequired[] = {
+		"materials.cfg", "resources.cfg",
+		"config", "core", "fonts", "graphics", "maps", "models",
+		"particles", "sounds", "textures",
+	};
+
+	tString sMissing = "";
+	for(size_t i=0; i<sizeof(vRequired)/sizeof(vRequired[0]); ++i)
+	{
+		const tWString sName = cString::To16Char(vRequired[i]);
+		if(FileExists(sName) || FolderExists(sName)) continue;
+		sMissing += (sMissing.empty() ? "" : ", ");
+		sMissing += vRequired[i];
+	}
+
+	if(sMissing.empty()) return true;
+
+	Error("The game's own files are not here. Missing: %s\n", sMissing.c_str());
+	Error("Copy the contents of your Penumbra: Overture folder in beside this\n");
+	Error("binary, the .cfg files included, and run it again.\n");
+	return false;
+}
+
+//-----------------------------------------------------------------------
+
 bool cInit::Init(tString asCommandLine)
 {
 	//iResourceBase::SetLogCreateAndDelete(true);
+
+	if(GameDataIsPresent() == false) return false;
 
 	// PERSONAL DIR /////////////////////
 	tWString sPersonalDir = GetSystemSpecialPath(eSystemPath_Personal);

@@ -26,7 +26,13 @@ int hplMain(const tString& asCommandLine)
 	
 	if (bRet == false) {
 		delete  pInit->mpGame ;
-		CreateMessageBoxW(_W("Error!"), pInit->msErrorMessage.c_str());
+		// A message box needs a window system, and Init can fail before there
+		// is one - when the game's data is missing it fails on the first line.
+		// Calling it then crashes, which turns a clear message in the log into
+		// a segfault that hides it.
+		if (pInit->mpGame != NULL) {
+			CreateMessageBoxW(_W("Error!"), pInit->msErrorMessage.c_str());
+		}
 		return 1;
 	}
 

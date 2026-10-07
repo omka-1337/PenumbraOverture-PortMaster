@@ -65,8 +65,16 @@ void cGraphicsHelper::DrawLoadingScreen(const tString &asFile)
 		mpDrawer->DrawTexture(pTex, 0, {800,600});
 	}
 
-	mpFont->Draw(cVector3f(400,300,50),22,cColor(1,1),eFontAlign_Center,
-				_W("%ls"),kTranslate("LoadTexts", "Loading").c_str());
+	// The texture below is checked and the font was not, so an installation
+	// missing its fonts crashed here instead of saying anything. That is how
+	// both Retroid Pocket 5 reports ended: a segfault on the loading screen,
+	// with the real cause (materials.cfg never copied across) twenty lines
+	// earlier in the log.
+	if(mpFont)
+	{
+		mpFont->Draw(cVector3f(400,300,50),22,cColor(1,1),eFontAlign_Center,
+					_W("%ls"),kTranslate("LoadTexts", "Loading").c_str());
+	}
 
 	mpDrawer->Render();
 
