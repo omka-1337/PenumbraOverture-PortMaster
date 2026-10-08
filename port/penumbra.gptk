@@ -1,55 +1,27 @@
-# Penumbra: Overture - gamepad mapping
-#
-# The game is built around dragging things with the mouse: you hold the
-# interact button and physically pull doors and drawers. That is why the right
-# stick is the mouse and R1 is the left button - everything else follows from
-# keeping those two usable at once.
-
 back = tab
 start = esc
-
 a = r
 b = space
 x = g
 y = f
-
 l1 = mouse_right
 r1 = mouse_left
 l2 = e
 r2 = q
 l3 = leftshift
 r3 = leftctrl
-
-# The D-pad used to send the arrow keys, which this game never reads, so four
-# buttons did nothing. The quick slots are nine and the pad has no room for
-# nine, so left and right step through the slots that hold something, up uses
-# the one you landed on, and down opens the notebook, which had no button
-# at all before.
 up = home
 down = n
 left = pageup
 right = pagedown
-
 left_analog_up = w
 left_analog_down = s
 left_analog_left = a
 left_analog_right = d
-
 right_analog_up = mouse_movement_up
 right_analog_down = mouse_movement_down
 right_analog_left = mouse_movement_left
 right_analog_right = mouse_movement_right
-
 deadzone_scale = 6
-
-# The RG40XX stick is on or off: it reports no tilt, so every push sends the
-# pointer at one speed and there is no fine control to be had from the stick
-# itself. The base speed is therefore set here, and the engine ramps it on top
-# (HPL_MOUSE_ACCEL in the launch script).
-#
-# mouse_scale divides, so a BIGGER number gives a SLOWER pointer. 6144 is what
-# the DOOM 3 port uses, which drives the view from the right stick the same way;
-# gptokeyb's own default of 512 is twelve times faster than that and unusable
-# for aiming at an inventory slot.
 mouse_scale = 6144
 mouse_delay = 16

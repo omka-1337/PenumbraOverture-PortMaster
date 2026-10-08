@@ -21,3 +21,26 @@ Build the binary with ./build-arm64.sh (needs arm64 emulation registered:
 docker run --privileged --rm tonistiigi/binfmt --install arm64), then OpenAL
 with ./build-openal-arm64.sh. ./package.sh puts all of it into
 build-arm64/penumbra.zip, which is what a release ships.
+
+## The pad mapping
+
+`penumbra.gptk` carries no comments, because PortMaster does not allow them in
+a mapping file, so the reasoning lives here.
+
+The right stick is the mouse and R1 is its left button. That is not a choice:
+this game is played by physically pulling doors, drawers and valves, so a
+pointer and a hold-and-drag button have to be usable at the same time. A device
+with only a left stick cannot play it.
+
+The D-pad used to send the arrow keys, which the game never reads, so four
+buttons did nothing. Left and right now step through the quick slots that hold
+something, up uses the one you stepped to, and down opens the notebook, which
+had no button at all. Stepping never uses an item by itself, which matters when
+a slot holds the only one you have.
+
+`mouse_scale` divides, so a bigger number gives a slower pointer. 6144 is what
+the DOOM 3 port uses, which drives the view from the right stick the same way;
+gptokeyb's own default of 512 is twelve times faster and unusable for aiming at
+an inventory slot. The engine scales this with the panel height, so the same
+number behaves the same way on a 480p handheld and on a 1080p one.
+
