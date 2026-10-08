@@ -24,7 +24,7 @@ rm -rf "$STAGE" "$ZIP"
 mkdir -p "$STAGE/penumbra/libs"
 
 cp "port/Penumbra Overture.sh" "$STAGE/"
-cp build-arm64/PenumbraOverture port/penumbra.gptk cover.png LICENSE NOTICE \
+cp build-arm64/PenumbraOverture port/penumbra.gptk LICENSE NOTICE \
 	"$STAGE/penumbra/"
 cp build-arm64/libs/libopenal.so.1 "$STAGE/penumbra/libs/"
 
