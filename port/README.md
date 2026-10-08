@@ -44,3 +44,14 @@ gptokeyb's own default of 512 is twelve times faster and unusable for aiming at
 an inventory slot. The engine scales this with the panel height, so the same
 number behaves the same way on a 480p handheld and on a 1080p one.
 
+`deadzone` is set explicitly rather than left at gptokeyb's own value, which a
+tester found large enough to make small, smooth movements of the right stick
+impossible: the view would not start turning until the stick was already well
+over. Lower it further if the view creeps while the stick is at rest, raise it
+if it will not hold still.
+
+`HPL_LOOK_SCALE` in the launch script multiplies the speed of the view only.
+The cursor in the menus and the inventory keeps the speed it had, because one
+setting cannot be right for both turning round and landing on an inventory
+slot.
+

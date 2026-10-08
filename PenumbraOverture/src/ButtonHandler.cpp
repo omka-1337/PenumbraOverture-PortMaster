@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Penumbra Overture.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <cstdlib>
 #include "ButtonHandler.h"
 
 #include "Init.h"
@@ -685,8 +686,20 @@ void cButtonHandler::Update(float afTimeStep)
 					cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
 					vRel /= mpLowLevelGraphics->GetVirtualSize();
 
-					mpPlayer->AddYaw(vRel.x * mfMouseSensitivity);
-					mpPlayer->AddPitch(vRel.y * mfMouseSensitivity);
+					// Looking around and pointing at things want different
+					// speeds, and up to now they shared one. A stick fast
+					// enough to turn you round makes the inventory cursor
+					// uncatchable, so the view gets its own multiplier on top
+					// of the shared sensitivity and the menus keep what they
+					// had. HPL_LOOK_SCALE sets it; 1 leaves the old behaviour.
+					static const float sfLookScale = []() {
+						const char *pEnv = getenv("HPL_LOOK_SCALE");
+						const float fValue = pEnv ? (float)atof(pEnv) : 1.0f;
+						return fValue > 0.0f ? fValue : 1.0f;
+					}();
+
+					mpPlayer->AddYaw(vRel.x * mfMouseSensitivity * sfLookScale);
+					mpPlayer->AddPitch(vRel.y * mfMouseSensitivity * sfLookScale);
 				}
 
 				///////////////////////////////////////

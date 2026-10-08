@@ -23,5 +23,6 @@ right_analog_down = mouse_movement_down
 right_analog_left = mouse_movement_left
 right_analog_right = mouse_movement_right
 deadzone_scale = 6
+deadzone = 4000
 mouse_scale = 6144
 mouse_delay = 16

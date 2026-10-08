@@ -55,6 +55,12 @@ fi
 # once per drawn frame, so a gain that climbs quickly reads as surging.
 export HPL_MOUSE_ACCEL=3:2:1
 
+# Looking around and pointing at things want different speeds. A stick quick
+# enough to turn you round makes the inventory cursor impossible to land on a
+# slot, so the view alone is multiplied by this and the menus keep the speed
+# they had. Lower it if turning overshoots.
+export HPL_LOOK_SCALE=2
+
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 
 $GPTOKEYB "PenumbraOverture" -c "$GAMEDIR/penumbra.gptk" &
