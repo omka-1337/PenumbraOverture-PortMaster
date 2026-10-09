@@ -12,6 +12,7 @@ This is a paid title. The port comes with only a compatibility patch and the [HP
 |---|---|---|---|---|---|
 |RG40XX H/V| ❔ | ❔ | ❔ | ✅ | ❔ |
 |R36S| ❔ | ❔ | ❔ | ❔ | ❔ |
+|RP5| ❔ | ❔ | ❔ | ❔ | ❔ |
 
 ## Disclaimer
 
