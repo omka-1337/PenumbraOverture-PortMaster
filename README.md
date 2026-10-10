@@ -5,7 +5,7 @@ Thanks to [Frictional Games](https://store.steampowered.com/app/22180/) for crea
 **Boots and plays.** Confirmed on RG40XX + ROCKNIX. Full playthrough and other CFWs untested.
 
 > [!IMPORTANT]
-This is a paid title. To use the port, you must have a legally purchased copy of the game on [Steam](https://store.steampowered.com/app/22180/Penumbra_Overture/) or [GOG](https://www.gog.com/en/game/the_penumbra_collection).
+This is a paid title. To play this port, you must have a legally purchased copy of the game on [Steam](https://store.steampowered.com/app/22180/Penumbra_Overture/) or [GOG](https://www.gog.com/en/game/the_penumbra_collection).
 
 ## Compatibility
 
