@@ -4,7 +4,8 @@ Thanks to [Frictional Games](https://store.steampowered.com/app/22180/) for crea
 
 **Boots and plays.** Confirmed on RG40XX + ROCKNIX. Full playthrough and other CFWs untested.
 
-This is a paid title. The port comes with only a compatibility patch and the [HPL1-Fedged](https://github.com/omka-1337/HPL1-Fledged) engine. The original game files are required for the port to work.
+> [!IMPORTANT]
+This is a paid title. To use the port, you must have a legally purchased copy of the game on [Steam](https://store.steampowered.com/app/22180/Penumbra_Overture/) or [GOG](https://www.gog.com/en/game/the_penumbra_collection).
 
 ## Compatibility
 
