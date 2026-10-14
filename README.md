@@ -41,7 +41,8 @@ Result: `Penumbra Overture.sh` + `ports/penumbra/` (engine, shaders, OpenAL).
 ### 2. Copy the game across
 
 Copy the folders and files listed below to `roms/ports/penumbra/` from your game's folder.
-[!TIP]
+
+> [!TIP]
 For Steam, this is: `steam/steamapps/common/Penumbra Overture` or right-click the game in your library > browse local files.
 
 ```
