@@ -9,11 +9,11 @@ This is a paid title. To play this port, you must have a legally purchased copy 
 
 ## Compatibility
 
-|Model|[AmberELEC](https://github.com/AmberELEC)|[dArkOS](https://github.com/christianhaitian/dArkOS)|[MuOS](https://github.com/MustardOS)|[ROCKNIX](https://github.com/ROCKNIX)|[KNULLI](https://github.com/knulli-cfw)|
-|---|---|---|---|---|---|
-|RG40XX H/V| ❔ | ❔ | ❔ | ✅ | ❔ |
-|R36S| ❔ | ❔ | ❔ | ❔ | ❔ |
-|RP5| ❔ | ❔ | ❔ | ❔ | ❔ |
+|[AmberELEC](https://github.com/AmberELEC)|[dArkOS](https://github.com/christianhaitian/dArkOS)|[MuOS](https://github.com/MustardOS)|[ROCKNIX](https://github.com/ROCKNIX)|[KNULLI](https://github.com/knulli-cfw)|
+|---|---|---|---|---|
+| ❔ | ❔ | ❔ | ✅ | ❔ |
+| ❔ | ❔ | ❔ | ❔ | ❔ |
+| ❔ | ❔ | ❔ | ❔ | ❔ |
 
 ## Disclaimer
 
