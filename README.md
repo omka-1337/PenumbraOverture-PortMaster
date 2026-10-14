@@ -12,8 +12,6 @@ This is a paid title. To play this port, you must have a legally purchased copy 
 |[AmberELEC](https://github.com/AmberELEC)|[dArkOS](https://github.com/christianhaitian/dArkOS)|[MuOS](https://github.com/MustardOS)|[ROCKNIX](https://github.com/ROCKNIX)|[KNULLI](https://github.com/knulli-cfw)|
 |---|---|---|---|---|
 | ❔ | ❔ | ❔ | ✅ | ❔ |
-| ❔ | ❔ | ❔ | ❔ | ❔ |
-| ❔ | ❔ | ❔ | ❔ | ❔ |
 
 ## Disclaimer
 
