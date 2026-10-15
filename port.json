@@ -16,7 +16,8 @@
         "inst": "Copy these folders and files listed below to roms/ports/penumbra/ from your game's folder: billboards/, lights/, particles/, config/, maps/, sounds/, core/, models/, textures/, fonts/, music/, graphics/, materials.cfg, resources.cfg.",
         "inst_md": null,
         "genres": [
-            "Survival Horror"
+            "adventure",
+            "puzzle"
         ],
         "runtime": [],
         "store": [
